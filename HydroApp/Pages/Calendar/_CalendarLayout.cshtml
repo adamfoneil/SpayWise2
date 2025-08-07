@@ -1,0 +1,29 @@
+@{
+    Layout = "_Layout";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2 sidebar bg-light">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["page"]?.ToString() == "/Calendar/SpayNeuter" ? "active" : "")" 
+                           asp-page="/Calendar/SpayNeuter">
+                            <i class="fas fa-cut"></i> SpayNeuter
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["page"]?.ToString() == "/Calendar/Wellness" ? "active" : "")" 
+                           asp-page="/Calendar/Wellness">
+                            <i class="fas fa-heart"></i> Wellness
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-10 ml-sm-auto px-4">
+            @RenderBody()
+        </div>
+    </div>
+</div>

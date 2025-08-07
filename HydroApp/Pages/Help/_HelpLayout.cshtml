@@ -1,0 +1,29 @@
+@{
+    Layout = "_Layout";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2 sidebar bg-light">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["page"]?.ToString() == "/Help/Changelog" ? "active" : "")" 
+                           asp-page="/Help/Changelog">
+                            <i class="fas fa-history"></i> Changelog
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["page"]?.ToString() == "/Help/Forum" ? "active" : "")" 
+                           asp-page="/Help/Forum">
+                            <i class="fas fa-comments"></i> Forum
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-10 ml-sm-auto px-4">
+            @RenderBody()
+        </div>
+    </div>
+</div>

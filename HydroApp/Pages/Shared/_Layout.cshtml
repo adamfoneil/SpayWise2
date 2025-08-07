@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/HydroApp.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 </head>
 <body>
     <header>
@@ -23,14 +24,158 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>
+        
+        <!-- Main Navigation (Level 1) -->
+        <nav class="main-nav">
+            <ul class="main-nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link @(ViewContext.RouteData.Values["page"]?.ToString().StartsWith("/Appointments") == true ? "active" : "")" 
+                       asp-page="/Appointments/Index">
+                        <i class="fas fa-calendar-check"></i> Appointments
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link @(ViewContext.RouteData.Values["page"]?.ToString().StartsWith("/Medical") == true ? "active" : "")" 
+                       asp-page="/Medical/Index">
+                        <i class="fas fa-stethoscope"></i> Medical
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link @(ViewContext.RouteData.Values["page"]?.ToString().StartsWith("/Calendar") == true ? "active" : "")" 
+                       asp-page="/Calendar/Index">
+                        <i class="fas fa-calendar-alt"></i> Calendar
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link @(ViewContext.RouteData.Values["page"]?.ToString().StartsWith("/Invoice") == true ? "active" : "")" 
+                       asp-page="/Invoice/Index">
+                        <i class="fas fa-file-invoice-dollar"></i> Invoice
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link @(ViewContext.RouteData.Values["page"]?.ToString().StartsWith("/Setup") == true ? "active" : "")" 
+                       asp-page="/Setup/Index">
+                        <i class="fas fa-cog"></i> Setup
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link @(ViewContext.RouteData.Values["page"]?.ToString().StartsWith("/Help") == true ? "active" : "")" 
+                       asp-page="/Help/Index">
+                        <i class="fas fa-question-circle"></i> Help
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Second Level Navigation -->
+        @{
+            var currentPage = ViewContext.RouteData.Values["page"]?.ToString();
+        }
+        
+        @if (currentPage?.StartsWith("/Appointments") == true)
+        {
+            <nav class="second-nav">
+                <ul class="second-nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link @(currentPage == "/Appointments/Intake" ? "active" : "")" 
+                           asp-page="/Appointments/Intake">Intake</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(currentPage == "/Appointments/Outtake" ? "active" : "")" 
+                           asp-page="/Appointments/Outtake">Outtake</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(currentPage == "/Appointments/Requested" ? "active" : "")" 
+                           asp-page="/Appointments/Requested">Requested</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(currentPage == "/Appointments/All" ? "active" : "")" 
+                           asp-page="/Appointments/All">All</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(currentPage == "/Appointments/Create" ? "active" : "")" 
+                           asp-page="/Appointments/Create">Create</a>
+                    </li>
+                </ul>
+            </nav>
+        }
+        
+        @if (currentPage?.StartsWith("/Calendar") == true)
+        {
+            <nav class="second-nav">
+                <ul class="second-nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link @(currentPage == "/Calendar/SpayNeuter" ? "active" : "")" 
+                           asp-page="/Calendar/SpayNeuter">SpayNeuter</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(currentPage == "/Calendar/Wellness" ? "active" : "")" 
+                           asp-page="/Calendar/Wellness">Wellness</a>
+                    </li>
+                </ul>
+            </nav>
+        }
+        
+        @if (currentPage?.StartsWith("/Invoice") == true)
+        {
+            <nav class="second-nav">
+                <ul class="second-nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link @(currentPage == "/Invoice/Pending" ? "active" : "")" 
+                           asp-page="/Invoice/Pending">Pending</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(currentPage == "/Invoice/AddCharges" ? "active" : "")" 
+                           asp-page="/Invoice/AddCharges">Add Charges</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(currentPage == "/Invoice/Receivable" ? "active" : "")" 
+                           asp-page="/Invoice/Receivable">Receivable</a>
+                    </li>
+                </ul>
+            </nav>
+        }
+        
+        @if (currentPage?.StartsWith("/Setup") == true)
+        {
+            <nav class="second-nav">
+                <ul class="second-nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link @(currentPage?.StartsWith("/Setup/Clinic") == true ? "active" : "")" 
+                           asp-page="/Setup/Clinic/Index">Clinic</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(currentPage?.StartsWith("/Setup/Capacity") == true ? "active" : "")" 
+                           asp-page="/Setup/Capacity/Index">Capacity</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(currentPage?.StartsWith("/Setup/Services") == true ? "active" : "")" 
+                           asp-page="/Setup/Services/Index">Services</a>
+                    </li>
+                </ul>
+            </nav>
+        }
+        
+        @if (currentPage?.StartsWith("/Help") == true)
+        {
+            <nav class="second-nav">
+                <ul class="second-nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link @(currentPage == "/Help/Changelog" ? "active" : "")" 
+                           asp-page="/Help/Changelog">Changelog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(currentPage == "/Help/Forum" ? "active" : "")" 
+                           asp-page="/Help/Forum">Forum</a>
+                    </li>
+                </ul>
+            </nav>
+        }
     </header>
     <div class="container">
         <main role="main" class="pb-3">

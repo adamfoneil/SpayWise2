@@ -1,0 +1,150 @@
+@{
+    Layout = "_Layout";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        @{
+            var currentPage = ViewContext.RouteData.Values["page"]?.ToString();
+        }
+        
+        @if (currentPage?.StartsWith("/Setup/Clinic") == true)
+        {
+            <div class="col-md-2 sidebar bg-light">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link @(currentPage == "/Setup/Clinic/Users" ? "active" : "")" 
+                               asp-page="/Setup/Clinic/Users">
+                                <i class="fas fa-users"></i> Users
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(currentPage == "/Setup/Clinic/Veterinarians" ? "active" : "")" 
+                               asp-page="/Setup/Clinic/Veterinarians">
+                                <i class="fas fa-user-md"></i> Veterinarians
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(currentPage == "/Setup/Clinic/DeclineReasons" ? "active" : "")" 
+                               asp-page="/Setup/Clinic/DeclineReasons">
+                                <i class="fas fa-times-circle"></i> Decline Reasons
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(currentPage == "/Setup/Clinic/Reminders" ? "active" : "")" 
+                               asp-page="/Setup/Clinic/Reminders">
+                                <i class="fas fa-bell"></i> Reminders
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(currentPage == "/Setup/Clinic/PaymentMethods" ? "active" : "")" 
+                               asp-page="/Setup/Clinic/PaymentMethods">
+                                <i class="fas fa-credit-card"></i> Payment Methods
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(currentPage == "/Setup/Clinic/Logos" ? "active" : "")" 
+                               asp-page="/Setup/Clinic/Logos">
+                                <i class="fas fa-image"></i> Logos
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-10 ml-sm-auto px-4">
+                @RenderBody()
+            </div>
+        }
+        else if (currentPage?.StartsWith("/Setup/Capacity") == true)
+        {
+            <div class="col-md-2 sidebar bg-light">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link @(currentPage == "/Setup/Capacity/Locations" ? "active" : "")" 
+                               asp-page="/Setup/Capacity/Locations">
+                                <i class="fas fa-map-marker-alt"></i> Locations
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(currentPage == "/Setup/Capacity/AppointmentTypes" ? "active" : "")" 
+                               asp-page="/Setup/Capacity/AppointmentTypes">
+                                <i class="fas fa-calendar-plus"></i> Appointment Types
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(currentPage == "/Setup/Capacity/Points" ? "active" : "")" 
+                               asp-page="/Setup/Capacity/Points">
+                                <i class="fas fa-dot-circle"></i> Points
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(currentPage == "/Setup/Capacity/Counts" ? "active" : "")" 
+                               asp-page="/Setup/Capacity/Counts">
+                                <i class="fas fa-calculator"></i> Counts
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(currentPage == "/Setup/Capacity/KennelSpace" ? "active" : "")" 
+                               asp-page="/Setup/Capacity/KennelSpace">
+                                <i class="fas fa-home"></i> Kennel Space
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(currentPage == "/Setup/Capacity/AppointmentTimes" ? "active" : "")" 
+                               asp-page="/Setup/Capacity/AppointmentTimes">
+                                <i class="fas fa-clock"></i> Appointment Times
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-10 ml-sm-auto px-4">
+                @RenderBody()
+            </div>
+        }
+        else if (currentPage?.StartsWith("/Setup/Services") == true)
+        {
+            <div class="col-md-2 sidebar bg-light">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link @(currentPage == "/Setup/Services/Items" ? "active" : "")" 
+                               asp-page="/Setup/Services/Items">
+                                <i class="fas fa-list-ul"></i> Items
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(currentPage == "/Setup/Services/VolumePricing" ? "active" : "")" 
+                               asp-page="/Setup/Services/VolumePricing">
+                                <i class="fas fa-chart-line"></i> Volume Pricing
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(currentPage == "/Setup/Services/Medical" ? "active" : "")" 
+                               asp-page="/Setup/Services/Medical">
+                                <i class="fas fa-stethoscope"></i> Medical
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(currentPage == "/Setup/Services/Dosages" ? "active" : "")" 
+                               asp-page="/Setup/Services/Dosages">
+                                <i class="fas fa-pills"></i> Dosages
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-10 ml-sm-auto px-4">
+                @RenderBody()
+            </div>
+        }
+        else
+        {
+            <div class="col-12">
+                @RenderBody()
+            </div>
+        }
+    </div>
+</div>

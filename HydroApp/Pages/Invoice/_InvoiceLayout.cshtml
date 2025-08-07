@@ -1,0 +1,35 @@
+@{
+    Layout = "_Layout";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2 sidebar bg-light">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["page"]?.ToString() == "/Invoice/Pending" ? "active" : "")" 
+                           asp-page="/Invoice/Pending">
+                            <i class="fas fa-clock"></i> Pending
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["page"]?.ToString() == "/Invoice/AddCharges" ? "active" : "")" 
+                           asp-page="/Invoice/AddCharges">
+                            <i class="fas fa-plus-circle"></i> Add Charges
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["page"]?.ToString() == "/Invoice/Receivable" ? "active" : "")" 
+                           asp-page="/Invoice/Receivable">
+                            <i class="fas fa-dollar-sign"></i> Receivable
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-10 ml-sm-auto px-4">
+            @RenderBody()
+        </div>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+@{
+    Layout = "_SetupLayout";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2 sidebar bg-light">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["page"]?.ToString() == "/Setup/Clinic/Users" ? "active" : "")" 
+                           asp-page="/Setup/Clinic/Users">
+                            <i class="fas fa-users"></i> Users
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["page"]?.ToString() == "/Setup/Clinic/Veterinarians" ? "active" : "")" 
+                           asp-page="/Setup/Clinic/Veterinarians">
+                            <i class="fas fa-user-md"></i> Veterinarians
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["page"]?.ToString() == "/Setup/Clinic/DeclineReasons" ? "active" : "")" 
+                           asp-page="/Setup/Clinic/DeclineReasons">
+                            <i class="fas fa-times-circle"></i> Decline Reasons
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["page"]?.ToString() == "/Setup/Clinic/Reminders" ? "active" : "")" 
+                           asp-page="/Setup/Clinic/Reminders">
+                            <i class="fas fa-bell"></i> Reminders
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["page"]?.ToString() == "/Setup/Clinic/PaymentMethods" ? "active" : "")" 
+                           asp-page="/Setup/Clinic/PaymentMethods">
+                            <i class="fas fa-credit-card"></i> Payment Methods
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["page"]?.ToString() == "/Setup/Clinic/Logos" ? "active" : "")" 
+                           asp-page="/Setup/Clinic/Logos">
+                            <i class="fas fa-image"></i> Logos
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-10 ml-sm-auto px-4">
+            @RenderBody()
+        </div>
+    </div>
+</div>

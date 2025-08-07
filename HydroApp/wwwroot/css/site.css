@@ -29,3 +29,116 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+
+/* Navigation Styles */
+.main-nav {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+  padding: 0;
+}
+
+.main-nav-tabs {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-bottom: none;
+}
+
+.main-nav-tabs .nav-item {
+  margin: 0 5px;
+}
+
+.main-nav-tabs .nav-link {
+  color: #495057;
+  background-color: #e9ecef;
+  border: 1px solid #dee2e6;
+  border-bottom: none;
+  border-radius: 6px 6px 0 0;
+  padding: 12px 20px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.main-nav-tabs .nav-link:hover {
+  background-color: #ffffff;
+  color: #007bff;
+}
+
+.main-nav-tabs .nav-link.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.second-nav {
+  background-color: #ffffff;
+  border-bottom: 1px solid #dee2e6;
+  padding: 0;
+}
+
+.second-nav-tabs {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.second-nav-tabs .nav-item {
+  margin: 0 3px;
+}
+
+.second-nav-tabs .nav-link {
+  color: #6c757d;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-bottom: none;
+  border-radius: 4px 4px 0 0;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.second-nav-tabs .nav-link:hover {
+  background-color: #e9ecef;
+  color: #495057;
+}
+
+.second-nav-tabs .nav-link.active {
+  background-color: #ffffff;
+  color: #007bff;
+  border-color: #007bff;
+  border-bottom: 1px solid #ffffff;
+}
+
+.sidebar {
+  padding: 20px 0;
+  height: calc(100vh - 200px);
+  overflow-y: auto;
+}
+
+.sidebar .nav-link {
+  color: #495057;
+  padding: 8px 16px;
+  margin: 2px 0;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.sidebar .nav-link:hover {
+  background-color: #e9ecef;
+  color: #007bff;
+}
+
+.sidebar .nav-link.active {
+  background-color: #007bff;
+  color: white;
+}
+
+.sidebar .nav-link i {
+  margin-right: 8px;
+  width: 16px;
+}

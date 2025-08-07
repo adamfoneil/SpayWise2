@@ -1,0 +1,47 @@
+@{
+    Layout = "_Layout";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2 sidebar bg-light">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["page"]?.ToString() == "/Appointments/Intake" ? "active" : "")" 
+                           asp-page="/Appointments/Intake">
+                            <i class="fas fa-sign-in-alt"></i> Intake
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["page"]?.ToString() == "/Appointments/Outtake" ? "active" : "")" 
+                           asp-page="/Appointments/Outtake">
+                            <i class="fas fa-sign-out-alt"></i> Outtake
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["page"]?.ToString() == "/Appointments/Requested" ? "active" : "")" 
+                           asp-page="/Appointments/Requested">
+                            <i class="fas fa-clipboard-list"></i> Requested
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["page"]?.ToString() == "/Appointments/All" ? "active" : "")" 
+                           asp-page="/Appointments/All">
+                            <i class="fas fa-list"></i> All
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["page"]?.ToString() == "/Appointments/Create" ? "active" : "")" 
+                           asp-page="/Appointments/Create">
+                            <i class="fas fa-plus"></i> Create
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-10 ml-sm-auto px-4">
+            @RenderBody()
+        </div>
+    </div>
+</div>
