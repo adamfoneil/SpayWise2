@@ -26,10 +26,15 @@ public class AppDbFactory : IDesignTimeDbContextFactory<SpayWiseDbContext>
 		.AddUserSecrets("24057544-6aba-4d06-8cd3-66192e2e69b8")
 		.Build();
 
-	public SpayWiseDbContext CreateDbContext(string[] args)
+	public static string GetConnectionString(IConfiguration config, string[] args)
 	{
 		var connectionName = args.Length == 1 ? args[0] : Config.GetValue<string>("ConnectionName") ?? "DefaultConnection";
-		var connectionString = Config.GetConnectionString(connectionName) ?? throw new Exception($"Connection string '{connectionName}' not found");
+		return config.GetConnectionString(connectionName) ?? throw new Exception($"Connection string '{connectionName}' not found");
+	}
+
+	public SpayWiseDbContext CreateDbContext(string[] args)
+	{
+		var connectionString = GetConnectionString(Config, args);
 		var optionsBuilder = new DbContextOptionsBuilder<SpayWiseDbContext>();
 		optionsBuilder.UseNpgsql(connectionString);
 		return new SpayWiseDbContext(optionsBuilder.Options);

@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="HydroApp/HydroApp.csproj" />
+  <Project Path="SpayWise.Data/SpayWise.Data.csproj" />
+</Solution>

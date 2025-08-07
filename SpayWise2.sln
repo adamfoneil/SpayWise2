@@ -5,7 +5,7 @@ VisualStudioVersion = 17.14.36401.2
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpayWise.Data", "SpayWise.Data\SpayWise.Data.csproj", "{F65761DD-CEE7-40B7-9952-F163223028F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpayWise.HydroApp", "SpayWise.HydroApp\SpayWise.HydroApp.csproj", "{159BEE9D-98F7-45AD-D316-A8F475476A04}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HydroApp", "HydroApp\HydroApp.csproj", "{B27D18BA-56C6-453B-AF3D-9109E484E0DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{F65761DD-CEE7-40B7-9952-F163223028F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F65761DD-CEE7-40B7-9952-F163223028F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F65761DD-CEE7-40B7-9952-F163223028F8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{159BEE9D-98F7-45AD-D316-A8F475476A04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{159BEE9D-98F7-45AD-D316-A8F475476A04}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{159BEE9D-98F7-45AD-D316-A8F475476A04}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{159BEE9D-98F7-45AD-D316-A8F475476A04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B27D18BA-56C6-453B-AF3D-9109E484E0DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B27D18BA-56C6-453B-AF3D-9109E484E0DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B27D18BA-56C6-453B-AF3D-9109E484E0DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B27D18BA-56C6-453B-AF3D-9109E484E0DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
