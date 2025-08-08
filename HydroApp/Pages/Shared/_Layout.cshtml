@@ -43,6 +43,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link @(ViewContext.RouteData.Values["page"]?.ToString().StartsWith("/Clients") == true ? "active" : "")"
+                               asp-page="/Clients/Index">
+                                <i class="bi bi-calendar-event me-1"></i>Clients
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link @(ViewContext.RouteData.Values["page"]?.ToString().StartsWith("/Invoice") == true ? "active" : "")"
                                asp-page="/Invoice/Index">
                                 <i class="bi bi-receipt me-1"></i>Invoice
@@ -123,6 +129,25 @@
                     </ul>
                 </div>
             </nav>
+        }
+        else if (currentPage?.StartsWith("/Clients") == true)
+        {
+           <nav class="bg-light border-bottom">
+               <div class="container">
+                    <ul class="nav nav-tabs border-0 justify-content-center bg-light">
+                        <li class="nav-item">
+                            <a class="nav-link @(currentPage.Contains("/Volume") ? "active" : "")" asp-page="/Clients/Volume">
+                                <i class="bi bi-hourglass-split me-1"></i>Volume
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(currentPage.Contains("/Owners") ? "active" : "")" asp-page="/Clients/Owners">
+                                <i class="bi bi-hourglass-split me-1"></i>Owners
+                            </a>
+                        </li>
+                    </ul>
+               </div>
+           </nav>
         }
         else if (currentPage?.StartsWith("/Invoice") == true)
         {
