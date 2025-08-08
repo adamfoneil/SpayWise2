@@ -6,33 +6,193 @@
     <title>@ViewData["Title"] - SpayWise</title>
     <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/bootstrap-icons.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/HydroApp.styles.css" asp-append-version="true" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <!-- Level 1 Navigation: Main sections as tabs -->
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">SpayWise</a>
+                <a class="navbar-brand" asp-area="" asp-page="/Index">
+                    <i class="bi bi-heart-pulse me-2"></i>SpayWise
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                    <ul class="navbar-nav flex-grow-1 justify-content-center">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                            <a class="nav-link @(ViewContext.RouteData.Values["page"]?.ToString().StartsWith("/Appointments") == true ? "active" : "")" 
+                               asp-page="/Appointments/Index">
+                                <i class="bi bi-calendar-check me-1"></i>Appointments
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                            <a class="nav-link @(ViewContext.RouteData.Values["page"]?.ToString().StartsWith("/Medical") == true ? "active" : "")"
+                               asp-page="/Medical/Index">
+                                <i class="bi bi-bandaid me-1"></i>Medical
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(ViewContext.RouteData.Values["page"]?.ToString().StartsWith("/Calendar") == true ? "active" : "")"
+                               asp-page="/Calendar/Index">
+                                <i class="bi bi-calendar-event me-1"></i>Calendar
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(ViewContext.RouteData.Values["page"]?.ToString().StartsWith("/Invoice") == true ? "active" : "")"
+                               asp-page="/Invoice/Index">
+                                <i class="bi bi-receipt me-1"></i>Invoice
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(ViewContext.RouteData.Values["page"]?.ToString().StartsWith("/Setup") == true ? "active" : "")"
+                               asp-page="/Setup/Index">
+                                <i class="bi bi-gear me-1"></i>Setup
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(ViewContext.RouteData.Values["page"]?.ToString().StartsWith("/Help") == true ? "active" : "")"
+                               asp-page="/Help/Index">
+                                <i class="bi bi-question-circle me-1"></i>Help
+                            </a>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>
+
+        @{
+            var currentPage = ViewContext.RouteData.Values["page"]?.ToString();
+        }
+
+        <!-- Level 2 Navigation: Sub-sections based on current main section -->
+        @if (currentPage?.StartsWith("/Appointments") == true)
+        {
+            <nav class="bg-light border-bottom">
+                <div class="container">
+                    <ul class="nav nav-tabs border-0 justify-content-center bg-light">
+                        <li class="nav-item">
+                            <a class="nav-link @(currentPage.Contains("/Intake") ? "active" : "")" asp-page="/Appointments/Intake">
+                                <i class="bi bi-box-arrow-in-right me-1"></i>Intake
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(currentPage.Contains("/Outtake") ? "active" : "")" asp-page="/Appointments/Outtake">
+                                <i class="bi bi-box-arrow-left me-1"></i>Outtake
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(currentPage.Contains("/Requested") ? "active" : "")" asp-page="/Appointments/Requested">
+                                <i class="bi bi-clock-history me-1"></i>Requested
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(currentPage.Contains("/All") ? "active" : "")" asp-page="/Appointments/All">
+                                <i class="bi bi-list me-1"></i>All
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(currentPage.Contains("/Create") ? "active" : "")" asp-page="/Appointments/Create">
+                                <i class="bi bi-plus-circle me-1"></i>Create
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        }
+        else if (currentPage?.StartsWith("/Calendar") == true)
+        {
+            <nav class="bg-light border-bottom">
+                <div class="container">
+                    <ul class="nav nav-tabs border-0 justify-content-center bg-light">
+                        <li class="nav-item">
+                            <a class="nav-link @(currentPage.Contains("/SpayNeuter") ? "active" : "")" asp-page="/Calendar/SpayNeuter">
+                                <i class="bi bi-scissors me-1"></i>Spay/Neuter
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(currentPage.Contains("/Wellness") ? "active" : "")" asp-page="/Calendar/Wellness">
+                                <i class="bi bi-heart me-1"></i>Wellness
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        }
+        else if (currentPage?.StartsWith("/Invoice") == true)
+        {
+            <nav class="bg-light border-bottom">
+                <div class="container">
+                    <ul class="nav nav-tabs border-0 justify-content-center bg-light">
+                        <li class="nav-item">
+                            <a class="nav-link @(currentPage.Contains("/Pending") ? "active" : "")" asp-page="/Invoice/Pending">
+                                <i class="bi bi-hourglass-split me-1"></i>Pending
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(currentPage.Contains("/AddCharges") ? "active" : "")" asp-page="/Invoice/AddCharges">
+                                <i class="bi bi-plus-square me-1"></i>Add Charges
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(currentPage.Contains("/Receivable") ? "active" : "")" asp-page="/Invoice/Receivable">
+                                <i class="bi bi-currency-dollar me-1"></i>Receivable
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        }
+        else if (currentPage?.StartsWith("/Setup") == true)
+        {
+            <nav class="bg-light border-bottom">
+                <div class="container">
+                    <ul class="nav nav-tabs border-0 justify-content-center bg-light">
+                        <li class="nav-item">
+                            <a class="nav-link @(currentPage.Contains("/Clinic") ? "active" : "")" asp-page="/Setup/Clinic/Index">
+                                <i class="bi bi-building me-1"></i>Clinic
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(currentPage.Contains("/Capacity") ? "active" : "")" asp-page="/Setup/Capacity/Index">
+                                <i class="bi bi-speedometer2 me-1"></i>Capacity
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(currentPage.Contains("/Services") ? "active" : "")" asp-page="/Setup/Services/Index">
+                                <i class="bi bi-tools me-1"></i>Services
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        }
+        else if (currentPage?.StartsWith("/Help") == true)
+        {
+            <nav class="bg-light border-bottom">
+                <div class="container">
+                    <ul class="nav nav-tabs border-0 justify-content-center bg-light">
+                        <li class="nav-item">
+                            <a class="nav-link @(currentPage.Contains("/Changelog") ? "active" : "")" asp-page="/Help/Changelog">
+                                <i class="bi bi-journal-text me-1"></i>Changelog
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(currentPage.Contains("/Forum") ? "active" : "")" asp-page="/Help/Forum">
+                                <i class="bi bi-chat-dots me-1"></i>Forum
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        }
     </header>
-    <div class="container">
+    <div class="container mt-3">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

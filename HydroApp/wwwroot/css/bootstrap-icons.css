@@ -1,0 +1,54 @@
+/* Bootstrap Icons - Basic fallback for development */
+/* When deployed, replace this with the full Bootstrap Icons CSS */
+
+.bi::before,
+[class^="bi-"]::before,
+[class*=" bi-"]::before {
+  display: inline-block;
+  font-family: bootstrap-icons !important;
+  font-style: normal;
+  font-weight: normal !important;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  vertical-align: -.125em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Basic icon content - placeholder symbols */
+.bi-heart-pulse::before { content: "♥"; }
+.bi-calendar-check::before { content: "📅"; }
+.bi-bandaid::before { content: "🩹"; }
+.bi-calendar-event::before { content: "📅"; }
+.bi-receipt::before { content: "🧾"; }
+.bi-gear::before { content: "⚙"; }
+.bi-question-circle::before { content: "❓"; }
+.bi-box-arrow-in-right::before { content: "📥"; }
+.bi-box-arrow-left::before { content: "📤"; }
+.bi-clock-history::before { content: "🕐"; }
+.bi-list::before { content: "📋"; }
+.bi-plus-circle::before { content: "➕"; }
+.bi-scissors::before { content: "✂"; }
+.bi-heart::before { content: "❤"; }
+.bi-hourglass-split::before { content: "⏳"; }
+.bi-plus-square::before { content: "➕"; }
+.bi-currency-dollar::before { content: "$"; }
+.bi-building::before { content: "🏢"; }
+.bi-speedometer2::before { content: "📊"; }
+.bi-tools::before { content: "🔧"; }
+.bi-journal-text::before { content: "📖"; }
+.bi-chat-dots::before { content: "💬"; }
+.bi-people::before { content: "👥"; }
+.bi-x-circle::before { content: "❌"; }
+.bi-bell::before { content: "🔔"; }
+.bi-credit-card::before { content: "💳"; }
+.bi-image::before { content: "🖼"; }
+.bi-geo-alt::before { content: "📍"; }
+.bi-diagram-3::before { content: "📊"; }
+.bi-bar-chart::before { content: "📊"; }
+.bi-house::before { content: "🏠"; }
+.bi-clock::before { content: "🕐"; }
+.bi-cash-stack::before { content: "💰"; }
+.bi-capsule::before { content: "💊"; }
+.bi-info-circle::before { content: "ℹ"; }
