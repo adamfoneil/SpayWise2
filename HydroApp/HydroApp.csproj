@@ -18,9 +18,13 @@
 
 	<ItemGroup>
 		<PackageReference Include="Hydro" Version="1.2.0" />
+		<PackageReference Include="Serilog.AspNetCore" Version="9.0.0" />
+		<PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
+		<PackageReference Include="Serilog.Sinks.PostgreSQL" Version="2.3.0" />
 	</ItemGroup>
 
 	<ItemGroup>
+    <ProjectReference Include="..\Serilog.Extensions\Serilog.Extensions.csproj" />
     <ProjectReference Include="..\SpayWise.Data\SpayWise.Data.csproj" />
   </ItemGroup>
 

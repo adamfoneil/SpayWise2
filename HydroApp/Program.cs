@@ -1,10 +1,23 @@
 using Hydro.Configuration;
+using HydroApp;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
+using Serilog.Extensions;
 using SpayWise.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var logLevels = new ApplicationLogLevels();
 var connectionString = AppDbFactory.GetConnectionString(builder.Configuration, args);
+
+Log.Logger = logLevels.GetConfiguration()
+	.WriteTo.Console()
+	.WriteTo.PostgreSQL(connectionString, "serilog", PostgresColumnOptions.Default, needAutoCreateTable: true)
+	.Enrich.FromLogContext()
+	.CreateLogger();
+
+builder.Host.UseSerilog();
+
 builder.Services.AddDbContextFactory<SpayWiseDbContext>(options => options.UseNpgsql(connectionString), ServiceLifetime.Singleton);
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
