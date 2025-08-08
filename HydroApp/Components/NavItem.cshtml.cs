@@ -1,0 +1,29 @@
+using Hydro;
+
+namespace HydroApp.Components;
+
+public enum MatchType
+{
+    StartsWith,
+    EndsWith,
+    Exact
+}
+
+public class NavItemModel : HydroComponent
+{
+    public string Text { get; set; } = string.Empty;
+    public string Href { get; set; } = string.Empty;
+    public string? Icon { get; set; }
+    public string MatchText { get; set; } = string.Empty;
+	public MatchType MatchType { get; set; } = MatchType.Exact;
+
+    public string? ActiveClass => ViewContext.RouteData.Values["page"] is string page
+        ? MatchType switch
+        {
+            MatchType.StartsWith => page.StartsWith(MatchText, StringComparison.OrdinalIgnoreCase) ? "active" : null,
+            MatchType.EndsWith => page.EndsWith(MatchText, StringComparison.OrdinalIgnoreCase) ? "active" : null,
+            MatchType.Exact => string.Equals(page, MatchText, StringComparison.OrdinalIgnoreCase) ? "active" : null,
+            _ => null
+		}
+        : null;
+}
