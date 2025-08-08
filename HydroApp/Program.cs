@@ -17,7 +17,7 @@ Log.Logger = logLevels.GetConfiguration()
 	.CreateLogger();
 
 builder.Host.UseSerilog();
-
+builder.Services.AddSingleton(logLevels);
 builder.Services.AddDbContextFactory<SpayWiseDbContext>(options => options.UseNpgsql(connectionString), ServiceLifetime.Singleton);
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
