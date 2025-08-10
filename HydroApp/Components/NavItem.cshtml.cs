@@ -9,7 +9,7 @@ public enum MatchType
     Exact
 }
 
-public class NavItemModel : HydroComponent
+public class NavItem : HydroComponent
 {
     public string Text { get; set; } = string.Empty;
     public string Href { get; set; } = string.Empty;
