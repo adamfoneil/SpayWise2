@@ -39,16 +39,13 @@ if (!app.Environment.IsDevelopment())
 	app.UseHsts();
 }
 
-app.UseAuthentication();
+app.UseHttpsRedirection();
 app.UseAuthentication();
 
-app.UseHttpsRedirection();
+app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthorization();
-app.MapStaticAssets();
-app.MapRazorPages()
-   .WithStaticAssets();
-
+app.MapRazorPages();
 app.UseHydro();
 
 app.Run();
