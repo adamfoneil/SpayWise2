@@ -27,14 +27,14 @@
 				</button>
 				<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
 					<ul class="navbar-nav flex-grow-1 justify-content-center">
-						<nav-item href="/Appointments/Index" text="Appointments" icon="bi-calendar-check" match-text="/Appointments" />
-						<nav-item href="/Medical/Index" text="Medical" icon="bi-bandaid" match-text="/Medical" />
-						<nav-item href="/Calendar/Index" text="Calendar" icon="bi-calendar-event" match-text="/Calendar" />
-						<nav-item href="/Clients/Index" text="Clients" icon="bi-people" match-text="/Clients" />
-						<nav-item href="/Invoice/Index" text="Invoice" icon="bi-receipt" match-text="/Invoice" />
-						<nav-item href="/Setup/Index" text="Setup" icon="bi-gear" match-text="/Setup" />
-						<nav-item href="/Reports/Index" text="Reports" icon="bi-bar-chart" match-text="/Reports" />
-						<nav-item href="/Help/Index" text="Help" icon="bi-question-circle" match-text="/Help" />
+						<nav-item href="/Appointments/Index" text="Appointments" icon="bi-calendar-check" />
+						<nav-item href="/Medical/Index" text="Medical" icon="bi-bandaid" />
+						<nav-item href="/Calendar/Index" text="Calendar" icon="bi-calendar-event" />
+						<nav-item href="/Clients/Index" text="Clients" icon="bi-people" />
+						<nav-item href="/Invoice/Index" text="Invoice" icon="bi-receipt" />
+						<nav-item href="/Reports/Index" text="Reports" icon="bi-bar-chart" />
+						<nav-item href="/Setup/Index" text="Setup" icon="bi-gear" />						
+						<nav-item href="/Help/Index" text="Help" icon="bi-question-circle" />
 					</ul>
 					<partial name="_LoginPartial" />
 				</div>
@@ -51,31 +51,11 @@
 			<nav class="bg-light border-bottom">
 				<div class="container">
 					<ul class="nav nav-tabs border-0 justify-content-center bg-light">
-						<li class="nav-item">
-							<a class="nav-link @(currentPage.Contains("/Intake") ? "active" : "")" asp-page="/Appointments/Intake">
-								<i class="bi bi-box-arrow-in-right me-1"></i>Intake
-							</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link @(currentPage.Contains("/Outtake") ? "active" : "")" asp-page="/Appointments/Outtake">
-								<i class="bi bi-box-arrow-left me-1"></i>Outtake
-							</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link @(currentPage.Contains("/Requested") ? "active" : "")" asp-page="/Appointments/Requested">
-								<i class="bi bi-clock-history me-1"></i>Requested
-							</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link @(currentPage.Contains("/All") ? "active" : "")" asp-page="/Appointments/All">
-								<i class="bi bi-list me-1"></i>All
-							</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link @(currentPage.Contains("/Create") ? "active" : "")" asp-page="/Appointments/Create">
-								<i class="bi bi-plus-circle me-1"></i>Create
-							</a>
-						</li>
+						<nav-item href="/Appointments/Intake" icon="bi-box-arrow-in-right" text="Intake" match-type="FullPath" />
+						<nav-item href="/Appointments/Outtake" icon="bi-box-arrow-left" text="Outtake" match-type="FullPath" />
+						<nav-item href="/Appointments/Requested" icon="bi-clock-history" text="Requested" match-type="FullPath" />
+						<nav-item href="/Appointments/All" icon="bi-list" text="All" match-type="FullPath" />
+						<nav-item href="/Appointments/Create" icon="bi-plus-circle" text="Create" match-type="FullPath" />
 					</ul>
 				</div>
 			</nav>
@@ -85,16 +65,8 @@
 			<nav class="bg-light border-bottom">
 				<div class="container">
 					<ul class="nav nav-tabs border-0 justify-content-center bg-light">
-						<li class="nav-item">
-							<a class="nav-link @(currentPage.Contains("/SpayNeuter") ? "active" : "")" asp-page="/Calendar/SpayNeuter">
-								<i class="bi bi-scissors me-1"></i>Spay/Neuter
-							</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link @(currentPage.Contains("/Wellness") ? "active" : "")" asp-page="/Calendar/Wellness">
-								<i class="bi bi-heart me-1"></i>Wellness
-							</a>
-						</li>
+						<nav-item href="/Calendar/SpayNeuter" icon="bi-scissors" text="Spay/Neuter" match-type="FullPath" />
+						<nav-item href="/Calendar/Wellness" icon="bi-heart" text="Wellness" match-type="FullPath" />
 					</ul>
 				</div>
 			</nav>
@@ -104,16 +76,8 @@
 		   <nav class="bg-light border-bottom">
 			   <div class="container">
 					<ul class="nav nav-tabs border-0 justify-content-center bg-light">
-						<li class="nav-item">
-							<a class="nav-link @(currentPage.Contains("/Volume") ? "active" : "")" asp-page="/Clients/Volume">
-								<i class="bi bi-hourglass-split me-1"></i>Volume
-							</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link @(currentPage.Contains("/Owners") ? "active" : "")" asp-page="/Clients/Owners">
-								<i class="bi bi-hourglass-split me-1"></i>Owners
-							</a>
-						</li>
+						<nav-item href="/Clients/Volume" icon="bi-hourglass-split" text="Volume" match-type="FullPath" />
+						<nav-item href="/Clients/Owners" icon="bi-hourglass-split" text="Owners" match-type="FullPath" />
 					</ul>
 			   </div>
 		   </nav>
@@ -123,21 +87,9 @@
 			<nav class="bg-light border-bottom">
 				<div class="container">
 					<ul class="nav nav-tabs border-0 justify-content-center bg-light">
-						<li class="nav-item">
-							<a class="nav-link @(currentPage.Contains("/Pending") ? "active" : "")" asp-page="/Invoice/Pending">
-								<i class="bi bi-hourglass-split me-1"></i>Pending
-							</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link @(currentPage.Contains("/AddCharges") ? "active" : "")" asp-page="/Invoice/AddCharges">
-								<i class="bi bi-plus-square me-1"></i>Add Charges
-							</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link @(currentPage.Contains("/Receivable") ? "active" : "")" asp-page="/Invoice/Receivable">
-								<i class="bi bi-currency-dollar me-1"></i>Receivable
-							</a>
-						</li>
+						<nav-item href="/Invoice/Pending" icon="bi-hourglass-split" text="Pending" match-type="FullPath" />
+						<nav-item href="/Invoice/AddCharges" icon="bi-plus-square" text="Add Charges" match-type="FullPath" />
+						<nav-item href="/Invoice/Receivable" icon="bi-currency-dollar" text="Receivable" match-type="FullPath" />
 					</ul>
 				</div>
 			</nav>
@@ -147,21 +99,9 @@
 			<nav class="bg-light border-bottom">
 				<div class="container">
 					<ul class="nav nav-tabs border-0 justify-content-center bg-light">
-						<li class="nav-item">
-							<a class="nav-link @(currentPage.Contains("/Clinic") ? "active" : "")" asp-page="/Setup/Clinic/Index">
-								<i class="bi bi-building me-1"></i>Clinic
-							</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link @(currentPage.Contains("/Capacity") ? "active" : "")" asp-page="/Setup/Capacity/Index">
-								<i class="bi bi-speedometer2 me-1"></i>Capacity
-							</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link @(currentPage.Contains("/Services") ? "active" : "")" asp-page="/Setup/Services/Index">
-								<i class="bi bi-tools me-1"></i>Services
-							</a>
-						</li>
+						<nav-item href="/Setup/Clinic/Index" icon="bi-building" text="Clinic" match-type="FullPath" />
+						<nav-item href="/Setup/Capacity/Index" icon="bi-speedometer2" text="Capacity" match-type="FullPath" />
+						<nav-item href="/Setup/Services/Index" icon="bi-tools" text="Services" match-type="FullPath" />
 					</ul>
 				</div>
 			</nav>
@@ -171,16 +111,8 @@
 			<nav class="bg-light border-bottom">
 				<div class="container">
 					<ul class="nav nav-tabs border-0 justify-content-center bg-light">
-						<li class="nav-item">
-							<a class="nav-link @(currentPage.Contains("/Changelog") ? "active" : "")" asp-page="/Help/Changelog">
-								<i class="bi bi-journal-text me-1"></i>Changelog
-							</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link @(currentPage.Contains("/Forum") ? "active" : "")" asp-page="/Help/Forum">
-								<i class="bi bi-chat-dots me-1"></i>Forum
-							</a>
-						</li>
+						<nav-item href="/Help/Changelog" icon="bi-journal-text" text="Changelog" match-type="FullPath" />
+						<nav-item href="/Help/Forum" icon="bi-chat-dots" text="Forum" match-type="FullPath" />
 					</ul>
 				</div>
 			</nav>
