@@ -1,6 +1,6 @@
 ﻿using Hydro;
 
-namespace HydroApp.Components;
+namespace HydroApp.Pages.Components;
 
 // ~/Pages/Components/PageCounter.cshtml.cs
 
