@@ -15,7 +15,7 @@ public class NavItem : HydroComponent
     public string Href { get; set; } = string.Empty;
     public string? Icon { get; set; }
     public string MatchText { get; set; } = string.Empty;
-	public MatchType MatchType { get; set; } = MatchType.Exact;
+	public MatchType MatchType { get; set; } = MatchType.StartsWith;
 
     public string? ActiveClass => ViewContext.RouteData.Values["page"] is string page
         ? MatchType switch
