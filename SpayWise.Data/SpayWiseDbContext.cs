@@ -10,7 +10,13 @@ public class SpayWiseDbContext(DbContextOptions<SpayWiseDbContext> options) : Id
 	public DbSet<Clinic> Clinics { get; set; }
 	public DbSet<ClinicUser> ClinicUsers { get; set; }
 	public DbSet<Client> Clients { get; set; }
+	public DbSet<VolumeClient> VolumeClients { get; set; }
 	public DbSet<ClientPhone> ClientPhones { get; set; }
+
+	public DbSet<Item> Items { get; set; }
+
+	public DbSet<AppSpecies> AppSpecies { get; set; }
+	public DbSet<Sex> Sexes { get; set; }
 
 	protected override void OnModelCreating(ModelBuilder builder)
 	{
