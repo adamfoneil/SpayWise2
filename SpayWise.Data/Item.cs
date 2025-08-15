@@ -1,4 +1,6 @@
-﻿using SpayWise.Data.Conventions;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using SpayWise.Data.Conventions;
 
 namespace SpayWise.Data;
 
@@ -46,4 +48,22 @@ public class Item : BaseTable
 	public bool IsActive { get; set; } = true;
 
 	public Clinic? Clinic { get; set; }
+}
+
+public class ItemConfiguration : IEntityTypeConfiguration<Item>
+{	
+	public void Configure(EntityTypeBuilder<Item> builder)
+	{
+		builder.Property(e => e.Name).HasMaxLength(100).IsRequired();
+		builder.Property(e => e.Description).HasMaxLength(500);
+		builder.Property(e => e.DisplayCategory).HasMaxLength(100);
+		builder.Property(e => e.Price).HasPrecision(10, 2);
+		builder.Property(e => e.OnlinePrice).HasPrecision(10, 2);
+		builder.Property(e => e.DosageUnits).HasMaxLength(50);
+		builder.Property(e => e.MedicalCode).HasMaxLength(50);
+		builder.Property(e => e.Concentrations).HasMaxLength(200);
+		builder.Property(e => e.Instructions).HasMaxLength(500);
+		builder.HasIndex(e => new { e.ClinicId, e.Name }).IsUnique();
+		builder.HasOne(e => e.Clinic).WithMany(c => c.Items).HasForeignKey(e => e.ClinicId).OnDelete(DeleteBehavior.Restrict);
+	}
 }

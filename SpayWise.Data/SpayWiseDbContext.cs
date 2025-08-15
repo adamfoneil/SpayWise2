@@ -17,6 +17,10 @@ public class SpayWiseDbContext(DbContextOptions<SpayWiseDbContext> options) : Id
 
 	public DbSet<AppSpecies> AppSpecies { get; set; }
 	public DbSet<Sex> Sexes { get; set; }
+	public DbSet<Species> Species { get; set; }
+
+	// lookup tables
+	public DbSet<DeclineReason> DeclineReasons { get; set; }
 
 	protected override void OnModelCreating(ModelBuilder builder)
 	{
