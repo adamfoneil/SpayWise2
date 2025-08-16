@@ -20,6 +20,8 @@ builder.Host.UseSerilog();
 builder.Services.AddSingleton(logLevels);
 builder.Services.AddDbContextFactory<SpayWiseDbContext>(options => options.UseNpgsql(connectionString), ServiceLifetime.Singleton);
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<CurrentClinicUserService>();
 
 builder.Services.AddRazorPages();
 builder.Services.AddHydro();

@@ -2,18 +2,22 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
+using HydroApp.Data;
 using SpayWise.Data;
 
 #nullable disable
 
-namespace SpayWise.Data.Migrations
+namespace HydroApp.Data.Migrations
 {
     [DbContext(typeof(SpayWiseDbContext))]
-    partial class SpayWiseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250816151155_CurrentClinic")]
+    partial class CurrentClinic
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -183,7 +187,7 @@ namespace SpayWise.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AppSpecies", (string)null);
+                    b.ToTable("AppSpecies");
                 });
 
             modelBuilder.Entity("SpayWise.Data.ApplicationUser", b =>
@@ -347,7 +351,7 @@ namespace SpayWise.Data.Migrations
 
                     b.HasIndex("ClinicId");
 
-                    b.ToTable("Clients", (string)null);
+                    b.ToTable("Clients");
                 });
 
             modelBuilder.Entity("SpayWise.Data.ClientPhone", b =>
@@ -369,7 +373,7 @@ namespace SpayWise.Data.Migrations
 
                     b.HasIndex("ClientId");
 
-                    b.ToTable("ClientPhones", (string)null);
+                    b.ToTable("ClientPhones");
                 });
 
             modelBuilder.Entity("SpayWise.Data.Clinic", b =>
@@ -449,7 +453,7 @@ namespace SpayWise.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Clinics", (string)null);
+                    b.ToTable("Clinics");
                 });
 
             modelBuilder.Entity("SpayWise.Data.ClinicUser", b =>
@@ -498,7 +502,7 @@ namespace SpayWise.Data.Migrations
                     b.HasIndex("ClinicId", "UserId")
                         .IsUnique();
 
-                    b.ToTable("ClinicUsers", (string)null);
+                    b.ToTable("ClinicUsers");
                 });
 
             modelBuilder.Entity("SpayWise.Data.DeclineReason", b =>
@@ -548,7 +552,7 @@ namespace SpayWise.Data.Migrations
                     b.HasIndex("ClinicId", "Name")
                         .IsUnique();
 
-                    b.ToTable("DeclineReasons", (string)null);
+                    b.ToTable("DeclineReasons");
                 });
 
             modelBuilder.Entity("SpayWise.Data.Item", b =>
@@ -665,7 +669,7 @@ namespace SpayWise.Data.Migrations
                     b.HasIndex("ClinicId", "Name")
                         .IsUnique();
 
-                    b.ToTable("Items", (string)null);
+                    b.ToTable("Items");
                 });
 
             modelBuilder.Entity("SpayWise.Data.Location", b =>
@@ -722,7 +726,7 @@ namespace SpayWise.Data.Migrations
                     b.HasIndex("ClinicId", "Name")
                         .IsUnique();
 
-                    b.ToTable("Locations", (string)null);
+                    b.ToTable("Locations");
                 });
 
             modelBuilder.Entity("SpayWise.Data.Sex", b =>
@@ -766,7 +770,7 @@ namespace SpayWise.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Sexes", (string)null);
+                    b.ToTable("Sexes");
                 });
 
             modelBuilder.Entity("SpayWise.Data.Species", b =>
@@ -826,7 +830,7 @@ namespace SpayWise.Data.Migrations
                     b.HasIndex("ClinicId", "Name")
                         .IsUnique();
 
-                    b.ToTable("Species", (string)null);
+                    b.ToTable("Species");
                 });
 
             modelBuilder.Entity("SpayWise.Data.Veterinarian", b =>
@@ -879,7 +883,7 @@ namespace SpayWise.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Veterinarians", (string)null);
+                    b.ToTable("Veterinarians");
                 });
 
             modelBuilder.Entity("SpayWise.Data.VolumeClient", b =>
@@ -939,7 +943,7 @@ namespace SpayWise.Data.Migrations
 
                     b.HasIndex("ClinicId");
 
-                    b.ToTable("VolumeClients", (string)null);
+                    b.ToTable("VolumeClients");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

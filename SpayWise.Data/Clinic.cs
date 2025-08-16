@@ -21,6 +21,7 @@ public class Clinic : BaseTable
 	public bool IsActive { get; set; } = true;
 
 	public ICollection<ClinicUser> Users { get; set; } = [];
+	public ICollection<ApplicationUser> CurrentUsers { get; set; } = [];
 	public ICollection<Species> Species { get; set; } = [];
 	public ICollection<DeclineReason> DeclineReasons { get; set; } = [];
 	public ICollection<Item> Items { get; set; } = [];
