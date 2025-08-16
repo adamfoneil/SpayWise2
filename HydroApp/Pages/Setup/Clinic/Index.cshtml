@@ -2,18 +2,51 @@
 @model HydroApp.Pages.Setup.Clinic.IndexModel
 @{
     ViewData["Title"] = "Clinic Setup";
-    
 }
 
 <h2>Clinic Setup</h2>
 
-<div class="card">
-    <div class="card-body">
-        <h5 class="card-title">Clinic Configuration</h5>
-        <p class="card-text">Configure clinic-specific settings including users, veterinarians, and operational parameters.</p>
-        <div class="alert alert-info">
-            <i class="bi bi-info-circle me-2"></i>
-            Select a category from the sidebar to configure specific clinic settings.
+<form method="post">
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 1rem; max-width: 900px;">
+        <!-- Clinic Name -->
+        <div style="grid-column: 1 / span 4;">
+            <label asp-for="Clinic.Name">Clinic Name</label>
+            <input asp-for="Clinic.Name" class="form-control" />
+        </div>
+        <!-- Address, City, State, Zip -->
+        <div>
+            <label asp-for="Clinic.Address1">Address</label>
+            <input asp-for="Clinic.Address1" class="form-control" />
+        </div>
+        <div>
+            <label asp-for="Clinic.City">City</label>
+            <input asp-for="Clinic.City" class="form-control" />
+        </div>
+        <div>
+            <label asp-for="Clinic.State">State</label>
+            <input asp-for="Clinic.State" class="form-control" />
+        </div>
+        <div>
+            <label asp-for="Clinic.ZipCode">Zip</label>
+            <input asp-for="Clinic.ZipCode" class="form-control" />
+        </div>
+        <!-- Phone Numbers -->
+        <div>
+            <label asp-for="Clinic.PrimaryPhone">Primary Phone</label>
+            <input asp-for="Clinic.PrimaryPhone" class="form-control" />
+        </div>
+        <div>
+            <label asp-for="Clinic.EmergencyPhone">Emergency Phone</label>
+            <input asp-for="Clinic.EmergencyPhone" class="form-control" />
+        </div>
+        <div>
+            <label asp-for="Clinic.FaxNumber">Fax</label>
+            <input asp-for="Clinic.FaxNumber" class="form-control" />
+        </div>
+        <div>
+            <label asp-for="Clinic.Email">Email</label>
+            <input asp-for="Clinic.Email" class="form-control" />
         </div>
     </div>
-</div>
+    <button type="submit" class="btn btn-primary mt-3">Save</button>
+</form>

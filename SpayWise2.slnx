@@ -2,4 +2,5 @@
   <Project Path="HydroApp/HydroApp.csproj" />
   <Project Path="Serilog.Extensions/Serilog.Extensions.csproj" Id="c9fa9ecb-1631-4266-b129-b2f1b2c30ec1" />
   <Project Path="SpayWise.Data/SpayWise.Data.csproj" />
+  <Project Path="Testing/Testing.csproj" Id="437c9b9c-13e8-481b-a612-44378e14b4a9" />
 </Solution>
