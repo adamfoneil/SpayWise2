@@ -89,19 +89,20 @@ public class SpayWiseDbContext(
 		}
 	}
 
-	private static DateTimeOffset LocalDateTime(string? timeZoneId)
+	private static DateTime LocalDateTime(string? timeZoneId)
 	{
-		var now = DateTime.Now;
+		var now = DateTime.UtcNow;
 		if (string.IsNullOrWhiteSpace(timeZoneId)) return now;
 
 		try
 		{
 			var timeZone = TimeZoneInfo.FindSystemTimeZoneById(timeZoneId);
-			return TimeZoneInfo.ConvertTime(now, timeZone);
+			var localTime = TimeZoneInfo.ConvertTimeFromUtc(now, timeZone);
+			return localTime;
 		}
 		catch
 		{
-			return now;
+			return DateTime.Now;
 		}
 	}
 }

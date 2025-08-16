@@ -62,7 +62,7 @@ namespace Testing
 		}
 
 		[TestMethod]
-		public async Task InsertClinic_PostgresIntegration_FailsDueToAuditEntitiesTimestamp()
+		public async Task InsertClinic_PostgresIntegration_IdempotentAndAssertFound()
 		{
 			// Arrange: Load connection string from HydroApp/appsettings.json
 			var config = new ConfigurationBuilder()
@@ -77,7 +77,9 @@ namespace Testing
 			var logger = new Microsoft.Extensions.Logging.Abstractions.NullLogger<SpayWiseDbContext>();
 			var db = new SpayWiseDbContext(options, logger);
 
-			var appUser = new ApplicationUser { UserName = "testuser", UserId = 1 };
+			// Set a known time zone for the test user
+			var testTimeZoneId = "Eastern Standard Time";
+			var appUser = new ApplicationUser { UserName = "testuser", UserId = 1, TimeZoneId = testTimeZoneId };
 			var clinicUser = CreateUserWithManageClinic(appUser);
 
 			var clinic = new Clinic
@@ -92,8 +94,30 @@ namespace Testing
 				OwnerUserId = appUser.UserId
 			};
 
-			db.Clinics.Add(clinic);			
-			await db.SaveChangesAsync(clinicUser);			
+			// Clean up any previous test row
+			var existing = db.Clinics.FirstOrDefault(c => c.Name == clinic.Name && c.Email == clinic.Email);
+			if (existing != null)
+			{
+				db.Clinics.Remove(existing);
+				await db.SaveChangesAsync(clinicUser);
+			}
+
+			// Capture expected UTC time
+			var utcNow = DateTime.UtcNow;
+			var tz = TimeZoneInfo.FindSystemTimeZoneById(testTimeZoneId);
+			var localTime = TimeZoneInfo.ConvertTime(utcNow, tz);			
+
+			db.Clinics.Add(clinic);
+			await db.SaveChangesAsync(clinicUser);
+
+			// Assert: Clinic row is found
+			var found = db.Clinics.FirstOrDefault(c => c.Name == clinic.Name && c.Email == clinic.Email);
+			Assert.IsNotNull(found);
+			Assert.AreEqual("Postgres Clinic", found.Name);
+
+			// Assert: CreatedAt is close to expected UTC time
+			var delta = (found.CreatedAt - localTime).TotalSeconds;
+			Assert.IsTrue(Math.Abs(delta) < 10, $"CreatedAt {found.CreatedAt} not within 10 seconds of expected {localTime}");
 		}
 	}
 }
