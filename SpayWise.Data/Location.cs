@@ -22,6 +22,10 @@ public class Location : BaseTable
 	public string? Phone { get; set; }
 
 	public Clinic? Clinic { get; set; }
+	public ICollection<DailyPointsLimit> DailyPoints { get; set; } = [];
+	public ICollection<PointsLimitOverride> OverridePoints { get; set; } = [];
+	public ICollection<DailyCountLimit> DailyCounts { get; set; } = [];
+	public ICollection<CountLimitOverride> OverrideCounts { get; set; } = [];
 }
 
 public class LocationConfiguration : IEntityTypeConfiguration<Location>

@@ -2,18 +2,21 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SpayWise.Data;
 
 #nullable disable
 
-namespace SpayWise.Data.Migrations
+namespace HydroApp.Data.Migrations
 {
     [DbContext(typeof(SpayWiseDbContext))]
-    partial class SpayWiseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250816175122_MoreTables")]
+    partial class MoreTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

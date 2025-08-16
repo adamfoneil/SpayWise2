@@ -8,4 +8,7 @@ public class Sex : BaseTable
 	public string Letter { get; set; } = default!;
 	public string ShortSterilizationIndicator { get; set; } = default!;
 	public string LongSterilizationIndicator { get; set; } = default!;
+
+	public ICollection<DailyCountLimit> DailyCountLimits { get; set; } = [];
+	public ICollection<CountLimitOverride> OverrideCounts { get; set; } = [];
 }

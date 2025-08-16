@@ -13,22 +13,32 @@ public class SpayWiseDbContext(
 {
 	private readonly ILogger<SpayWiseDbContext> _logger = logger;
 
+	// system tables
+	public DbSet<AppSpecies> AppSpecies { get; set; }
+	public DbSet<Sex> Sexes { get; set; }
+
+	// core tables
 	public DbSet<Clinic> Clinics { get; set; }	
 	public DbSet<Location> Locations { get; set; }
 	public DbSet<ClinicUser> ClinicUsers { get; set; }
 	public DbSet<Client> Clients { get; set; }
 	public DbSet<VolumeClient> VolumeClients { get; set; }
-	public DbSet<ClientPhone> ClientPhones { get; set; }
-
-	public DbSet<Item> Items { get; set; }
-
-	public DbSet<AppSpecies> AppSpecies { get; set; }
-	public DbSet<Sex> Sexes { get; set; }
+	public DbSet<ClientPhone> ClientPhones { get; set; }	
 	public DbSet<Species> Species { get; set; }
+	public DbSet<Item> Items { get; set; }
+	public DbSet<AppointmentType> AppointmentTypes { get; set; }
 
-	// lookup tables
+	// capacity
+	public DbSet<DailyCountLimit> DailyCountLimits { get; set; }
+	public DbSet<DailyPointsLimit> DailyPointLimits { get; set; }
+	public DbSet<CountLimitOverride> OverrideCounts { get; set; }
+	public DbSet<PointsLimitOverride> OverridePoints { get; set; }
+	// todo: kennel space
+
+	// satellite tables
 	public DbSet<Veterinarian> Veterinarians { get; set; }
 	public DbSet<DeclineReason> DeclineReasons { get; set; }
+	public DbSet<PaymentMethod> PaymentMethods { get; set; }
 
 	private static Dictionary<Type, Permissions> RequiredPermissions => new()
 	{
@@ -36,7 +46,11 @@ public class SpayWiseDbContext(
 		[typeof(Species)] = Permissions.ManageClinic,
 		[typeof(VolumeClient)] = Permissions.ManageVolumeClients,
 		[typeof(ClinicUser)] = Permissions.ManageUsers,
-		[typeof(Item)] = Permissions.ManageItems
+		[typeof(Item)] = Permissions.ManageItems,
+		[typeof(DailyCountLimit)] = Permissions.ManageCapacity,
+		[typeof(DailyPointsLimit)] = Permissions.ManageCapacity,
+		[typeof(CountLimitOverride)] = Permissions.ManageCapacity,
+		[typeof(PointsLimitOverride)] = Permissions.ManageCapacity
 	};
 
 	public async Task<int> SaveChangesAsync(ClinicUser user)

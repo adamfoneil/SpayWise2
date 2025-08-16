@@ -22,6 +22,7 @@ public class Species : BaseTable
 
 	public Clinic? Clinic { get; set; }
 	public AppSpecies? AppSpecies { get; set; }
+	public ICollection<DailyCountLimit> DailyCountLimits { get; set; } = [];
 }
 
 public class SpeciesConfiguration : IEntityTypeConfiguration<Species>
@@ -38,5 +39,6 @@ public class SpeciesConfiguration : IEntityTypeConfiguration<Species>
 			.OnDelete(DeleteBehavior.Restrict);
 
 		builder.HasIndex(s => new { s.ClinicId, s.Name }).IsUnique();
+		builder.HasIndex(s => new { s.ClinicId, s.Abbreviation }).IsUnique();
 	}
 }

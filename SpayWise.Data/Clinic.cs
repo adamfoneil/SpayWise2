@@ -26,4 +26,6 @@ public class Clinic : BaseTable
 	public ICollection<DeclineReason> DeclineReasons { get; set; } = [];
 	public ICollection<Item> Items { get; set; } = [];
 	public ICollection<Location> Locations { get; set; } = [];
+	public ICollection<PaymentMethod> PaymentMethods { get; set; } = [];
+	public ICollection<AppointmentType> AppointmentTypes { get; set; } = [];
 }
