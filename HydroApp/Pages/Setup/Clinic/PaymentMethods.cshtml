@@ -15,8 +15,8 @@
         <form method="post" class="pm-insert-form">
             <div class="pm-grid-form">
                 <input asp-for="EditingPaymentMethod.Name" required class="form-control" />
-				<input asp-for="EditingPaymentMethod.Data" placeholder="email/account key or Id" class="form-control" />
-                <input asp-for="EditingPaymentMethod.IsActive" />                
+                <input asp-for="EditingPaymentMethod.Data" placeholder="email/account key or Id" class="form-control" />
+                <input asp-for="EditingPaymentMethod.IsActive" />
                 <button type="submit" class="btn btn-primary">Add</button>
             </div>
         </form>
@@ -32,7 +32,7 @@
         @foreach (var pm in Model.PaymentMethods)
         {
             <div class="pm-grid-row">
-                <edit-button />
+                <button class="btn btn-sm btn-secondary" type="button" onclick="toggleEditRow('@pm.Id')">Edit</button>
                 <span>@pm.Name</span>
                 <span>@pm.Data</span>
                 <span>
@@ -45,7 +45,21 @@
                         <span class="badge bg-secondary">No</span>
                     }
                 </span>
-                <delete-button click="(() => Model.Delete(pm.Id))" />
+                <button class="btn btn-sm btn-danger">Delete</button>
+            </div>
+            <!-- Hidden Edit Row -->
+            <div class="pm-grid-row pm-edit-row" id="edit-row-@pm.Id" style="display:none;">
+                <span></span>
+                <form method="post" style="grid-column: span 4;">
+                    <div class="pm-grid-form">
+                        <input name="EditingPaymentMethod.Name" value="@pm.Name" required class="form-control" />
+                        <input name="EditingPaymentMethod.Data" value="@pm.Data" placeholder="email/account key or Id" class="form-control" />
+                        <input type="checkbox" name="EditingPaymentMethod.IsActive" @(pm.IsActive ? "checked" : "") />
+                        <input type="hidden" name="EditingPaymentMethod.Id" value="@pm.Id" />
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="button" class="btn btn-secondary" onclick="hideEditRow('@pm.Id')">Cancel</button>
+                    </div>
+                </form>
             </div>
         }
     </div>
@@ -76,4 +90,17 @@
     gap: 12px;
     align-items: center;
 }
+.pm-edit-row {
+    background: #f9f9f9;
+}
 </style>
+
+<script>
+function toggleEditRow(id) {
+    var row = document.getElementById('edit-row-' + id);    
+    row.style.display = (row.style.display === 'grid') ? 'none' : 'grid';    
+}
+function hideEditRow(id) {
+    document.getElementById('edit-row-' + id).style.display = 'none';
+}
+</script>
