@@ -31,7 +31,8 @@ public class IndexModel(
         OwnedClinics = await db.Clinics
             .Where(c => c.OwnerUserId == _appUser!.UserId)
             .OrderBy(c => c.Name)
-            .ToArrayAsync();
+            .AsNoTracking()
+			.ToArrayAsync();
 
         if (SelectedClinicId.HasValue)
         {
@@ -49,17 +50,6 @@ public class IndexModel(
     {
         using var db = _dbFactory.CreateDbContext();
         (_appUser, _clinicUser) = await _currentUser.GetAsync();
-
-        OwnedClinics = await db.Clinics
-            .Where(c => c.OwnerUserId == _appUser!.UserId)
-            .OrderBy(c => c.Name)
-            .AsNoTracking()
-            .ToArrayAsync();
-
-        if (SelectedClinicId.HasValue)
-        {
-            Clinic = await db.Clinics.FindAsync(SelectedClinicId.Value) ?? new SpayWise.Data.Clinic();
-        }
 
         if (!ModelState.IsValid)
         {
