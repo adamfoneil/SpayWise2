@@ -9,12 +9,11 @@ public class VolumeClient : BaseTable
 	public int ClientId { get; set; }
 	public string? BackColor { get; set; }
 	public string? TextColor { get; set; }
-	public string? Category { get; set; }
+	public string? AccountingCategory { get; set; }
 
 	public bool AllowInvoicing { get; set; }
 	public bool RequireCredit { get; set; }
-	public bool AllowOnlineScheduling { get; set; }
-	public bool AllowWeightSurcharges { get; set; }
+	public bool AllowOnlineScheduling { get; set; }	
 
 	public Clinic? Clinic { get; set; }
 	public Client? Client { get; set; }

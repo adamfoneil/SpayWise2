@@ -24,4 +24,5 @@ public class Clinic : BaseTable
 	public ICollection<Species> Species { get; set; } = [];
 	public ICollection<DeclineReason> DeclineReasons { get; set; } = [];
 	public ICollection<Item> Items { get; set; } = [];
+	public ICollection<Location> Locations { get; set; } = [];
 }

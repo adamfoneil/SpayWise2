@@ -7,7 +7,8 @@ namespace SpayWise.Data;
 
 public class SpayWiseDbContext(DbContextOptions<SpayWiseDbContext> options) : IdentityDbContext<ApplicationUser>(options)
 {
-	public DbSet<Clinic> Clinics { get; set; }
+	public DbSet<Clinic> Clinics { get; set; }	
+	public DbSet<Location> Locations { get; set; }
 	public DbSet<ClinicUser> ClinicUsers { get; set; }
 	public DbSet<Client> Clients { get; set; }
 	public DbSet<VolumeClient> VolumeClients { get; set; }
@@ -20,6 +21,7 @@ public class SpayWiseDbContext(DbContextOptions<SpayWiseDbContext> options) : Id
 	public DbSet<Species> Species { get; set; }
 
 	// lookup tables
+	public DbSet<Veterinarian> Veterinarians { get; set; }
 	public DbSet<DeclineReason> DeclineReasons { get; set; }
 
 	protected override void OnModelCreating(ModelBuilder builder)
