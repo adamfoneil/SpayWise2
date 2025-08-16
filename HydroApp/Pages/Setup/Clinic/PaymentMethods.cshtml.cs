@@ -36,4 +36,17 @@ public class PaymentMethodsModel(
 		await db.SaveChangesAsync(_clinicUser!);
 		return RedirectToPage();
 	}
+
+	public async Task<IActionResult> Delete(int id)
+	{
+		(_appUser, _clinicUser) = await _currentUser.GetAsync();
+		using var db = _dbFactory.CreateDbContext();
+		var pm = await db.PaymentMethods.FirstOrDefaultAsync(pm => pm.Id == id && pm.ClinicId == _appUser!.CurrentClinicId);
+		if (pm != null)
+		{
+			db.PaymentMethods.Remove(pm);
+			await db.SaveChangesAsync(_clinicUser!);
+		}
+		return RedirectToPage();
+	}
 }

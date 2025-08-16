@@ -32,7 +32,7 @@
         @foreach (var pm in Model.PaymentMethods)
         {
             <div class="pm-grid-row">
-                <button class="btn btn-sm btn-secondary">Edit</button>
+                <edit-button />
                 <span>@pm.Name</span>
                 <span>@pm.Data</span>
                 <span>
@@ -45,7 +45,7 @@
                         <span class="badge bg-secondary">No</span>
                     }
                 </span>
-                <button class="btn btn-sm btn-danger">Delete</button>
+                <delete-button click="(() => Model.Delete(pm.Id))" />
             </div>
         }
     </div>
