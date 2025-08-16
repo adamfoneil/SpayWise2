@@ -9,6 +9,7 @@ public class ApplicationUser : IdentityUser
 	public int UserId { get; set; }
 	public string? TimeZoneId { get; set; }
 	public int? CurrentClinicId { get; set; }
+	public DateTime? LastLoginDate { get; set; }
 
 	public ICollection<ClinicUser> Clinics { get; set; } = [];
 	public Clinic? CurrentClinic { get; set; }

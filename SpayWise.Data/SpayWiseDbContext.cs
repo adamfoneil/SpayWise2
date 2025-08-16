@@ -41,6 +41,7 @@ public class SpayWiseDbContext(
 
 	public async Task<int> SaveChangesAsync(ClinicUser user)
 	{
+		if (user is null) throw new ArgumentNullException(nameof(user));
 		if (!user.IsEnabled) throw new InvalidOperationException("User is disabled");
 
 		ThrowIfNoPermission(user);
