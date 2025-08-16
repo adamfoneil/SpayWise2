@@ -16,6 +16,7 @@ public enum Permissions
 	PostInvoices = 1 << 6,
 	ViewReports = 1 << 7,
 	ManageVolumeClients = 1 << 8,
+	All = ~0
 }
 
 public class ClinicUser : BaseTable

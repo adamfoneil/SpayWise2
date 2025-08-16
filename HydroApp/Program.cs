@@ -1,5 +1,6 @@
 using Hydro.Configuration;
 using HydroApp;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Serilog.Extensions;
@@ -28,6 +29,8 @@ builder.Services.AddHydro();
 
 builder.Services
 	.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)	
+	.AddSignInManager<ApplicationSignInManager>()
+	.AddUserManager<ApplicationUserManager>()
 	.AddEntityFrameworkStores<SpayWiseDbContext>();
 
 var app = builder.Build();

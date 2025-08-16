@@ -7,7 +7,16 @@
 <h2>Clinic Setup</h2>
 
 <form method="post">
+    <input type="hidden" asp-for="Clinic.OwnerUserId" />
+	<input type="hidden" asp-for="Clinic.Id" />
     <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 1rem; max-width: 900px;">
+        <!-- Clinic Selection Dropdown -->
+        <div style="grid-column: 1 / span 4;">
+            <label for="selectedClinicId">Select Clinic</label>
+            <select asp-for="SelectedClinicId" asp-items="@(new SelectList(Model.OwnedClinics, "Id", "Name", Model.SelectedClinicId))" class="form-control" onchange="this.form.submit()">
+                <option value="">-- my clinics --</option>
+            </select>
+        </div>
         <!-- Clinic Name -->
         <div style="grid-column: 1 / span 4;">
             <label asp-for="Clinic.Name">Clinic Name</label>

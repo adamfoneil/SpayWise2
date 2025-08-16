@@ -92,7 +92,7 @@ public class SpayWiseDbContext(
 
 	private static DateTime LocalDateTime(string? timeZoneId)
 	{
-		var now = DateTime.UtcNow;
+		var now = DateTime.Now;
 		if (string.IsNullOrWhiteSpace(timeZoneId)) return now;
 
 		try
