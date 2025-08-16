@@ -2,7 +2,6 @@
 @model HydroApp.Pages.Setup.Clinic.PaymentMethodsModel
 @{
     ViewData["Title"] = "Payment Methods";
-    
 }
 
 <h2>Payment Methods</h2>
@@ -11,9 +10,70 @@
     <div class="card-body">
         <h5 class="card-title">Payment Method Configuration</h5>
         <p class="card-text">Configure accepted payment methods and processing settings.</p>
-        <div class="alert alert-info">
-            <i class="bi bi-info-circle me-2"></i>
-            Payment method configuration will be implemented here.
+
+        <!-- Insert Form -->
+        <form method="post" class="pm-insert-form">
+            <div class="pm-grid-form">
+                <input asp-for="EditingPaymentMethod.Name" required class="form-control" />
+				<input asp-for="EditingPaymentMethod.Data" placeholder="email/account key or Id" class="form-control" />
+                <input asp-for="EditingPaymentMethod.IsActive" />                
+                <button type="submit" class="btn btn-primary">Add</button>
+            </div>
+        </form>
+
+        <!-- Payment Methods Grid -->
+        <div class="pm-grid-header">
+            <span></span>
+            <span>Name</span>
+            <span>Data</span>
+            <span>Active</span>
+            <span></span>
         </div>
+        @foreach (var pm in Model.PaymentMethods)
+        {
+            <div class="pm-grid-row">
+                <button class="btn btn-sm btn-secondary">Edit</button>
+                <span>@pm.Name</span>
+                <span>@pm.Data</span>
+                <span>
+                    @if (pm.IsActive)
+                    {
+                        <span class="badge bg-success">Yes</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">No</span>
+                    }
+                </span>
+                <button class="btn btn-sm btn-danger">Delete</button>
+            </div>
+        }
     </div>
 </div>
+
+<style>
+.pm-grid-header, .pm-grid-row {
+    display: grid;
+    grid-template-columns: 80px 1fr 2fr 100px 80px;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+}
+.pm-grid-header {
+    font-weight: bold;
+    border-bottom: 2px solid #eee;
+    margin-top: 24px;
+}
+.pm-grid-row:not(:last-child) {
+    border-bottom: 1px solid #f3f3f3;
+}
+.pm-insert-form {
+    margin-bottom: 24px;
+}
+.pm-grid-form {
+    display: grid;
+    grid-template-columns: 1fr 2fr 100px 120px;
+    gap: 12px;
+    align-items: center;
+}
+</style>

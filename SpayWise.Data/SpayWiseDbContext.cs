@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using SpayWise.Data.Conventions;
+using SpayWise.Data.Interfaces;
 
 namespace SpayWise.Data;
 
@@ -50,7 +51,10 @@ public class SpayWiseDbContext(
 		[typeof(DailyCountLimit)] = Permissions.ManageCapacity,
 		[typeof(DailyPointsLimit)] = Permissions.ManageCapacity,
 		[typeof(CountLimitOverride)] = Permissions.ManageCapacity,
-		[typeof(PointsLimitOverride)] = Permissions.ManageCapacity
+		[typeof(PointsLimitOverride)] = Permissions.ManageCapacity,
+		[typeof(Veterinarian)] = Permissions.ManageClinic,
+		[typeof(DeclineReason)] = Permissions.ManageClinic,
+		[typeof(PaymentMethod)] = Permissions.ManageClinic,
 	};
 
 	public async Task<int> SaveChangesAsync(ClinicUser user)
@@ -60,9 +64,32 @@ public class SpayWiseDbContext(
 
 		ThrowIfNoPermission(user);
 
+		SetClinicId(user);
+
 		AuditEntities(user.ApplicationUser);
 
 		return await base.SaveChangesAsync();
+	}
+
+	private void SetClinicId(ClinicUser user)
+	{
+		foreach (var entry in ChangeTracker.Entries())
+		{
+			if (entry.Entity is IClinicEntity clinicEntity)
+			{
+				if (entry.State == EntityState.Added)
+				{					
+					clinicEntity.ClinicId = user.ClinicId;
+				}
+				else if (entry.State == EntityState.Modified)
+				{
+					if (clinicEntity.ClinicId != user.ClinicId)
+					{
+						throw new InvalidOperationException("Cannot change ClinicId of an entity.");
+					}
+				}
+			}
+		}
 	}
 
 	private void ThrowIfNoPermission(ClinicUser user)

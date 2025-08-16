@@ -7,14 +7,15 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SpayWise.Data.Conventions;
+using SpayWise.Data.Interfaces;
 
 namespace SpayWise.Data;
 
-public class PaymentMethod : BaseTable
+public class PaymentMethod : BaseTable, IClinicEntity
 {
 	public int ClinicId { get; set; }
 	public string Name { get; set; } = default!;
-	public string Data { get; set; } = default!;
+	public string? Data { get; set; } = default!;
 	public bool IsActive { get; set; } = true;
 
 	public Clinic? Clinic { get; set; }
@@ -25,7 +26,7 @@ public class PaymentMethodConfiguration : IEntityTypeConfiguration<PaymentMethod
 	public void Configure(EntityTypeBuilder<PaymentMethod> builder)
 	{
 		builder.Property(p => p.Name).IsRequired().HasMaxLength(50);
-		builder.Property(p => p.Data).IsRequired().HasMaxLength(500);
+		builder.Property(p => p.Data).HasMaxLength(500);
 
 		builder.HasOne(p => p.Clinic)
 			.WithMany(e => e.PaymentMethods)

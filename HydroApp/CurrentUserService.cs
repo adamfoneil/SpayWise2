@@ -4,7 +4,7 @@ using System.Security.Claims;
 
 namespace HydroApp;
 
-public class CurrentClinicUserService(IHttpContextAccessor httpContextAccessor, SpayWiseDbContext dbContext)
+public class CurrentUserService(IHttpContextAccessor httpContextAccessor, SpayWiseDbContext dbContext)
 {
     private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
     private readonly SpayWiseDbContext _dbContext = dbContext;

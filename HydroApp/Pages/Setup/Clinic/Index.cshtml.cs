@@ -7,10 +7,10 @@ namespace HydroApp.Pages.Setup.Clinic;
 
 public class IndexModel(
     IDbContextFactory<SpayWiseDbContext> dbFactory,
-    CurrentClinicUserService currentUser) : PageModel
+    CurrentUserService currentUser) : PageModel
 {
 	private readonly IDbContextFactory<SpayWiseDbContext> _dbFactory = dbFactory;
-	private readonly CurrentClinicUserService _currentUser = currentUser;
+	private readonly CurrentUserService _currentUser = currentUser;
 
 	private ApplicationUser? _appUser;
 	private ClinicUser? _clinicUser;

@@ -8,7 +8,7 @@ namespace HydroApp;
 
 internal class ApplicationSignInManager(
 	IDbContextFactory<SpayWiseDbContext> dbFactory,
-	CurrentClinicUserService currentUser,
+	CurrentUserService currentUser,
 	UserManager<ApplicationUser> userManager, 
 	IHttpContextAccessor contextAccessor, 
 	IUserClaimsPrincipalFactory<ApplicationUser> claimsFactory, 
@@ -18,7 +18,7 @@ internal class ApplicationSignInManager(
 	IUserConfirmation<ApplicationUser> confirmation) : SignInManager<ApplicationUser>(userManager, contextAccessor, claimsFactory, optionsAccessor, logger, schemes, confirmation)
 {
 	private readonly IDbContextFactory<SpayWiseDbContext> _dbFactory = dbFactory;
-	private readonly CurrentClinicUserService _currentUser = currentUser;
+	private readonly CurrentUserService _currentUser = currentUser;
 
 	public override async Task<SignInResult> PasswordSignInAsync(ApplicationUser user, string password, bool isPersistent, bool lockoutOnFailure)
 	{
