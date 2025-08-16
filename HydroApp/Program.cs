@@ -18,7 +18,7 @@ Log.Logger = logLevels.GetConfiguration()
 
 builder.Host.UseSerilog();
 builder.Services.AddSingleton(logLevels);
-builder.Services.AddDbContextFactory<SpayWiseDbContext>(options => options.UseNpgsql(connectionString), ServiceLifetime.Singleton);
+builder.Services.AddDbContextFactory<SpayWiseDbContext>(options => options.UseNpgsql(connectionString).EnableSensitiveDataLogging(), ServiceLifetime.Singleton);
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<CurrentClinicUserService>();
