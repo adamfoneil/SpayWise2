@@ -60,6 +60,7 @@ public class IndexModel(
         {
             Clinic = await db.Clinics.FindAsync(SelectedClinicId.Value) ?? new SpayWise.Data.Clinic();
         }
+
         if (!ModelState.IsValid)
         {
             return Page();
