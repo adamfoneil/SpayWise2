@@ -1,5 +1,4 @@
 <Solution>
-  <Project Path="HydroApp/HydroApp.csproj" />
   <Project Path="Serilog.Extensions/Serilog.Extensions.csproj" />
   <Project Path="Services/Services.csproj" />
   <Project Path="SpayWise.Data/SpayWise.Data.csproj" />

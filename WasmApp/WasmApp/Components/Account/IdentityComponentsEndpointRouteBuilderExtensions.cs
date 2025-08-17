@@ -8,7 +8,7 @@ using System.Security.Claims;
 using System.Text.Json;
 using WasmApp.Components.Account.Pages;
 using WasmApp.Components.Account.Pages.Manage;
-using SpayWise.Data
+using SpayWise.Data;
 
 namespace Microsoft.AspNetCore.Routing
 {
