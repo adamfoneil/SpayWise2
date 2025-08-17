@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Services;
 using SpayWise.Data;
 using WasmApp;
 using WasmApp.Components;
@@ -34,7 +35,8 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddIdentityCore<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
 	.AddEntityFrameworkStores<SpayWiseDbContext>()
-	.AddSignInManager()
+	.AddSignInManager<ApplicationSignInManager>()
+	.AddUserManager<ApplicationUserManager>()
 	.AddDefaultTokenProviders();
 
 builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSender>();

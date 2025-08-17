@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Serilog.Extensions\Serilog.Extensions.csproj" />
+    <ProjectReference Include="..\..\Services\Services.csproj" />
     <ProjectReference Include="..\..\SpayWise.Data\SpayWise.Data.csproj" />
     <ProjectReference Include="..\WasmApp.Client\WasmApp.Client.csproj" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="9.0.8" />

@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using SpayWise.Data;
 
-namespace HydroApp;
+namespace Services;
 
 public class ApplicationUserManager(
 	IDbContextFactory<SpayWiseDbContext> dbFactory,
