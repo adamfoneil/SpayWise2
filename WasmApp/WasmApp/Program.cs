@@ -1,3 +1,6 @@
+using Blazorise;
+using Blazorise.Bootstrap5;
+using Blazorise.Icons.FontAwesome;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Services;
@@ -15,6 +18,14 @@ var connectionString = AppDbFactory.GetConnectionString(builder.Configuration, a
 builder.Services.AddRazorComponents()
 	.AddInteractiveWebAssemblyComponents()
 	.AddAuthenticationStateSerialization();
+
+builder.Services
+	.AddBlazorise(options =>
+	{
+		options.Immediate = true;
+	})
+	.AddBootstrap5Providers()
+	.AddFontAwesomeIcons();
 
 builder.Services.AddCascadingAuthenticationState();
 builder.Services.AddScoped<IdentityUserAccessor>();
