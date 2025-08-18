@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Components.Authorization
+@inject NavigationManager Navigation
+@inject AuthenticationStateProvider AuthStateProvider
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -7,12 +11,60 @@
     <base href="/" />
     <link rel="stylesheet" href="@Assets["app.css"]" />
     <link rel="stylesheet" href="@Assets["WasmApp.styles.css"]" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" />
     <ImportMap />
     <HeadOutlet @rendermode="PageRenderMode" />
 </head>
 
 <body>
-    <Routes @rendermode="PageRenderMode" />
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom mb-3">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="bi bi-heart-pulse me-2"></i>SpayWise
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><NavLink class="nav-link" href="/Appointments/Index">Appointments</NavLink></li>
+                    <li class="nav-item"><NavLink class="nav-link" href="/Medical/Index">Medical</NavLink></li>
+                    <li class="nav-item"><NavLink class="nav-link" href="/Calendar/Index">Calendar</NavLink></li>
+                    <li class="nav-item"><NavLink class="nav-link" href="/Clients/Index">Clients</NavLink></li>
+                    <li class="nav-item"><NavLink class="nav-link" href="/Invoice/Index">Invoice</NavLink></li>
+                    <li class="nav-item"><NavLink class="nav-link" href="/Reports/Index">Reports</NavLink></li>
+                    <li class="nav-item"><NavLink class="nav-link" href="/Setup/Index">Setup</NavLink></li>
+                    <li class="nav-item"><NavLink class="nav-link" href="/Help/Index">Help</NavLink></li>
+                </ul>
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <AuthorizeView>
+                        <Authorized>
+                            <li class="nav-item">
+                                <NavLink class="nav-link" href="/Account/Manage">Profile</NavLink>
+                            </li>
+                            <li class="nav-item">
+                                <button class="nav-link btn btn-link" @onclick="Logout">Logout</button>
+                            </li>
+                        </Authorized>
+                        <NotAuthorized>
+                            <li class="nav-item">
+                                <NavLink class="nav-link" href="/Account/Login">Login</NavLink>
+                            </li>
+                        </NotAuthorized>
+                    </AuthorizeView>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <Routes @rendermode="PageRenderMode" />
+    </div>
+    <footer class="border-top footer text-muted mt-4">
+        <div class="container">
+            &copy; 2025 - HydroApp - <NavLink href="/Privacy">Privacy</NavLink>
+        </div>
+    </footer>
     <script src="_framework/blazor.web.js"></script>
 </body>
 
@@ -24,4 +76,14 @@
 
     private IComponentRenderMode? PageRenderMode =>
         HttpContext.AcceptsInteractiveRouting() ? InteractiveWebAssembly : null;
+
+    private async Task Logout()
+    {
+        var returnUrl = Navigation.ToBaseRelativePath(Navigation.Uri);
+        var formData = new Dictionary<string, string> { ["returnUrl"] = returnUrl };
+        var content = new FormUrlEncodedContent(formData);
+        using var http = new HttpClient();
+        await http.PostAsync("/Account/Logout", content);
+        Navigation.NavigateTo("/");
+    }
 }
