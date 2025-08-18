@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Components.Authorization
-@inject NavigationManager Navigation
+@inject NavigationManager Nav
 @inject AuthenticationStateProvider AuthStateProvider
 
 <!DOCTYPE html>
@@ -32,14 +32,14 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><NavLink class="nav-link" href="/Appointments/Index">Appointments</NavLink></li>
-                    <li class="nav-item"><NavLink class="nav-link" href="/Medical/Index">Medical</NavLink></li>
-                    <li class="nav-item"><NavLink class="nav-link" href="/Calendar/Index">Calendar</NavLink></li>
-                    <li class="nav-item"><NavLink class="nav-link" href="/Clients/Index">Clients</NavLink></li>
-                    <li class="nav-item"><NavLink class="nav-link" href="/Invoice/Index">Invoice</NavLink></li>
-                    <li class="nav-item"><NavLink class="nav-link" href="/Reports/Index">Reports</NavLink></li>
-                    <li class="nav-item"><NavLink class="nav-link" href="/Setup/Index">Setup</NavLink></li>
-                    <li class="nav-item"><NavLink class="nav-link" href="/Help/Index">Help</NavLink></li>
+                    <AuthorizeView>
+                        <Authorized>
+                            @foreach (var item in Navigation.Menu)
+                            {
+                                <li class="nav-item"><NavLink class="nav-link" href="@item.Href">@item.Text</NavLink></li>
+                            }
+                        </Authorized>
+                    </AuthorizeView>                    
                 </ul>
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <AuthorizeView>
@@ -83,11 +83,11 @@
 
     private async Task Logout()
     {
-        var returnUrl = Navigation.ToBaseRelativePath(Navigation.Uri);
+        var returnUrl = Nav.ToBaseRelativePath(Nav.Uri);
         var formData = new Dictionary<string, string> { ["returnUrl"] = returnUrl };
         var content = new FormUrlEncodedContent(formData);
         using var http = new HttpClient();
         await http.PostAsync("/Account/Logout", content);
-        Navigation.NavigateTo("/");
+        Nav.NavigateTo("/");
     }
 }
