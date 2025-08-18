@@ -5,7 +5,7 @@ public static class Navigation
 	public static MenuItem[] Menu =>
 	[
 		Appointments,
-		new("Medical", "/Medical/Index"),
+		new("Medical", "/Medical"),
 		new("Calendar", "/Calendar/Index"),
 		new("Clients", "/Clients/Index"),
 		new("Invoice", "/Invoice/Index"),
@@ -14,7 +14,7 @@ public static class Navigation
 		new("Help", "/Help/Index")
 	];
 
-	public static MenuItem Appointments => new("Appointments", "/Appointments/Index")
+	public static MenuItem Appointments => new("Appointments", "/Appointments")
 	{
 		Children =
 		[
