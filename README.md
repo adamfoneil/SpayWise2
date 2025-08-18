@@ -1,1 +1,1 @@
-I started this briefly as a [Hydro](https://usehydro.dev/) reboot of [Hs5](https://github.com/adamfoneil/Hs5). But due to lack of a component suite, Hydro is not productive enough for me, so I'm pivoting Blazor Web Assembly using [Blazorise](https://blazorise.com/).
+I started this briefly as a [Hydro](https://usehydro.dev/) reboot of [Hs5](https://github.com/adamfoneil/Hs5). But due to lack of a component suite, Hydro is not productive enough for me, so I'm pivoting to Blazor Web Assembly using [Blazorise](https://blazorise.com/).
