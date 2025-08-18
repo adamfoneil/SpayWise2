@@ -3,6 +3,7 @@
 @using System.ComponentModel.DataAnnotations
 @using Microsoft.AspNetCore.Identity
 @using SpayWise.Data
+@using System.Globalization
 
 @inject UserManager<ApplicationUser> UserManager
 @inject SignInManager<ApplicationUser> SignInManager
@@ -28,6 +29,17 @@
                 <label for="Input.PhoneNumber" class="form-label">Phone number</label>
                 <ValidationMessage For="() => Input.PhoneNumber" class="text-danger" />
             </div>
+            <div class="form-floating mb-3">
+                <InputSelect @bind-Value="Input.TimeZoneId" id="Input.TimeZoneId" class="form-select">
+                    <option value="">Select time zone</option>
+                    @foreach (var tz in TimeZones)
+                    {
+                        <option value="@tz.Id">@tz.DisplayName</option>
+                    }
+                </InputSelect>
+                <label for="Input.TimeZoneId" class="form-label">Time zone</label>
+                <ValidationMessage For="() => Input.TimeZoneId" class="text-danger" />
+            </div>
             <button type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
         </EditForm>
     </div>
@@ -37,6 +49,7 @@
     private ApplicationUser user = default!;
     private string? username;
     private string? phoneNumber;
+    private List<TimeZoneInfo> TimeZones = new();
 
     [CascadingParameter]
     private HttpContext HttpContext { get; set; } = default!;
@@ -51,21 +64,48 @@
         phoneNumber = await UserManager.GetPhoneNumberAsync(user);
 
         Input.PhoneNumber ??= phoneNumber;
+        Input.TimeZoneId ??= user.TimeZoneId;
+
+        // Load all system time zones
+        TimeZones = TimeZoneInfo.GetSystemTimeZones().ToList();
     }
 
     private async Task OnValidSubmitAsync()
     {
+        bool updated = false;
+
         if (Input.PhoneNumber != phoneNumber)
         {
             var setPhoneResult = await UserManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
             if (!setPhoneResult.Succeeded)
             {
                 RedirectManager.RedirectToCurrentPageWithStatus("Error: Failed to set phone number.", HttpContext);
+                return;
             }
+            updated = true;
         }
 
-        await SignInManager.RefreshSignInAsync(user);
-        RedirectManager.RedirectToCurrentPageWithStatus("Your profile has been updated", HttpContext);
+        if (Input.TimeZoneId != user.TimeZoneId)
+        {
+            user.TimeZoneId = Input.TimeZoneId;
+            var updateResult = await UserManager.UpdateAsync(user);
+            if (!updateResult.Succeeded)
+            {
+                RedirectManager.RedirectToCurrentPageWithStatus("Error: Failed to set time zone.", HttpContext);
+                return;
+            }
+            updated = true;
+        }
+
+        if (updated)
+        {
+            await SignInManager.RefreshSignInAsync(user);
+            RedirectManager.RedirectToCurrentPageWithStatus("Your profile has been updated", HttpContext);
+        }
+        else
+        {
+            RedirectManager.RedirectToCurrentPageWithStatus("No changes detected.", HttpContext);
+        }
     }
 
     private sealed class InputModel
@@ -73,5 +113,8 @@
         [Phone]
         [Display(Name = "Phone number")]
         public string? PhoneNumber { get; set; }
+
+        [Display(Name = "Time zone")]
+        public string? TimeZoneId { get; set; }
     }
 }
