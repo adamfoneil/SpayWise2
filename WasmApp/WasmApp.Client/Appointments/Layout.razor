@@ -1,0 +1,14 @@
+﻿@inherits LayoutComponentBase
+
+<ul class="navbar-nav me-auto mb-2 mb-lg-0">    
+    @foreach (var item in Navigation.Appointments.Children)
+    {
+        <li class="nav-item"><NavLink class="nav-link" Match="NavLinkMatch.Prefix" href="@item.Href">@item.Text</NavLink></li>
+    }    
+</ul>
+
+@Body
+
+@code {
+
+}
