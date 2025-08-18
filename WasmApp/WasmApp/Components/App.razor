@@ -36,7 +36,7 @@
                         <Authorized>
                             @foreach (var item in Navigation.Menu)
                             {
-                                <li class="nav-item"><NavLink class="nav-link" href="@item.Href">@item.Text</NavLink></li>
+                                <li class="nav-item"><NavLink class="nav-link" Match="NavLinkMatch.Prefix" href="@item.Href">@item.Text</NavLink></li>
                             }
                         </Authorized>
                     </AuthorizeView>                    

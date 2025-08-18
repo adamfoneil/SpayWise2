@@ -1,4 +1,4 @@
-﻿namespace WasmApp;
+﻿namespace WasmApp.Client;
 
 public static class Navigation
 {
