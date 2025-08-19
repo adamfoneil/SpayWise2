@@ -6,9 +6,9 @@ Appointment : BaseTable
 DropOff TimeOnly
 Pickup DateTime
 StatusId AppointmentStatus
-VolumeClientId Client?
-CopayClientId Client?
-TransportClientId Client?
+VolumeClientId Client? // shelter/rescue/group
+CopayClientId Client? // additional payer (grant)
+TransportClientId Client? 
 HasRabiesVaccineProof bool
 KennelSizeId?
 Points int

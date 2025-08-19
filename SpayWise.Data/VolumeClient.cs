@@ -14,6 +14,7 @@ public class VolumeClient : BaseTable
 	public bool AllowInvoicing { get; set; }
 	public bool RequireCredit { get; set; }
 	public bool AllowOnlineScheduling { get; set; }	
+	public bool AllowCapacity { get; set; }
 
 	public Clinic? Clinic { get; set; }
 	public Client? Client { get; set; }
