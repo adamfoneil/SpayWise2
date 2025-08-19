@@ -1,13 +1,24 @@
-﻿@inherits LayoutComponentBase
+﻿@using WasmApp.Client
+@inherits LayoutComponentBase
 
-<ul class="navbar-nav me-auto mb-2 mb-lg-0">    
-    @foreach (var item in Navigation.Appointments.Children)
-    {
-        <li class="nav-item"><NavLink class="nav-link" Match="NavLinkMatch.Prefix" href="@item.Href">@item.Text</NavLink></li>
-    }    
-</ul>
-
-@Body
+<div class="row">
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-header">
+                <h5>Appointments</h5>
+            </div>
+            <div class="list-group list-group-flush">    
+                @foreach (var item in Navigation.Appointments.Children)
+                {
+                    <NavLink class="list-group-item list-group-item-action" Match="NavLinkMatch.Prefix" href="@item.Href">@item.Text</NavLink>
+                }    
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9">
+        @Body
+    </div>
+</div>
 
 @code {
 
