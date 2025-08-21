@@ -1,6 +1,6 @@
 MedicalItem : BaseTable
-AppointmentId
-ItemId
+#AppointmentId
+#ItemId
 StatusId? MedicalItemStatus { Completed, Declined }
 Dosage decimal?
 DosageInfo string(255)?
